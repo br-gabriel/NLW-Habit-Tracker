@@ -6,7 +6,7 @@ generator client {
 }
 
 generator erd {
-  provider = "prisma-erd-generator"
+  provider = "prisma-erd-generator" //npx prisma generate
 }
 
 datasource db {
