@@ -80,7 +80,7 @@ export async function appRoutes(app: FastifyInstance) {
         const { id } = toggleHabitParams.parse(request.params)
 
         const today = dayjs().startOf('day').toDate()
-        
+
         let day = await prisma.day.findUnique({
             where: {
                 date: today,
@@ -118,5 +118,30 @@ export async function appRoutes(app: FastifyInstance) {
                 }
             })
         }
+    })
+
+    app.get('/summary', async () => {
+        const summary = await prisma.$queryRaw`
+            SELECT 
+                D.id,
+                D.date,
+                (
+                    SELECT 
+                        cast(count(*) as float)
+                    FROM day_habits DH
+                    WHERE DH.day_id = D.id
+                ) as completed,
+                (
+                    SELECT 
+                        cast(count(*) as float)
+                    FROM habit_week_days HWD
+                    JOIN habits H
+                        ON H.id = HWD.habit.id
+                    WHERE
+                        HWD.week_day = cast(strftime('%w', D.date/1000.0, 'unixepoch') as int)
+                        AND H.created_at <= D.date
+                ) as amount
+            FROM days D
+        `
     })
 }
