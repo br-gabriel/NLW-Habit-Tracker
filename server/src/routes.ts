@@ -36,7 +36,7 @@ export async function appRoutes(app: FastifyInstance) {
         })
 
         const { date } = getDayParams.parse(request.query)
-        
+
         const parsedDate = dayjs(date).startOf('day')
         const weekDay = parsedDate.get('day')
 
@@ -99,7 +99,7 @@ export async function appRoutes(app: FastifyInstance) {
             where: {
                 day_id_habit_id: {
                     day_id: day.id,
-                    habit_id: id, 
+                    habit_id: id,
                 }
             }
         })
@@ -123,25 +123,27 @@ export async function appRoutes(app: FastifyInstance) {
     app.get('/summary', async () => {
         const summary = await prisma.$queryRaw`
             SELECT 
-                D.id,
-                D.date,
-                (
-                    SELECT 
-                        cast(count(*) as float)
-                    FROM day_habits DH
-                    WHERE DH.day_id = D.id
-                ) as completed,
-                (
-                    SELECT 
-                        cast(count(*) as float)
-                    FROM habit_week_days HWD
-                    JOIN habits H
-                        ON H.id = HWD.habit.id
-                    WHERE
-                        HWD.week_day = cast(strftime('%w', D.date/1000.0, 'unixepoch') as int)
-                        AND H.created_at <= D.date
-                ) as amount
+              D.id, 
+              D.date,
+              (
+                SELECT 
+                  cast(count(*) as float)
+                FROM day_habits DH
+                WHERE DH.day_id = D.id
+              ) as completed,
+              (
+                SELECT
+                  cast(count(*) as float)
+                FROM habit_week_days HDW
+                JOIN habits H
+                  ON H.id = HDW.habit_id
+                WHERE
+                  HDW.week_day = cast(strftime('%w', D.date/1000.0, 'unixepoch') as int)
+                  AND H.created_at <= D.date
+              ) as amount
             FROM days D
         `
+
+        return summary
     })
 }
