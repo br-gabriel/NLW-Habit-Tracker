@@ -16,7 +16,7 @@ export function Checkbox({ title, checked = false, ...rest }: Props) {
         >
             {
                 checked ?
-                <View className="h-8 bg-green-500 rounded-lg items-center justify-center">
+                <View className="h-8 w-8 bg-green-500 rounded-lg items-center justify-center">
                     <Feather
                         name="check"
                         size={20}
@@ -27,7 +27,7 @@ export function Checkbox({ title, checked = false, ...rest }: Props) {
                 <View  className="h-8 w-8 bg-zinc-900 rounded-lg"/>
             }
 
-            <Text className="text-white text-base ml-3">
+            <Text className="text-white text-base ml-3 font-semibold">
                 {title}
             </Text>
         </TouchableOpacity>
