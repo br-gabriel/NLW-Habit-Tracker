@@ -89,7 +89,7 @@ export function NewHabitForm() {
                         
             </div>
 
-            <button type="submit" className="mt-6 rounded-lg p-4 flex items-center gap-3 justify-center font-semibold bg-green-600 hover:bg-green-500">
+            <button type="submit" className="mt-6 rounded-lg p-4 flex items-center gap-3 justify-center font-semibold bg-green-600 hover:bg-green-500 transition-colors">
                 <Check size={20} weight="bold" />
                 Confirmar
             </button>
