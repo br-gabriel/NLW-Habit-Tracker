@@ -9,8 +9,8 @@ import { api } from "../lib/axios";
 const avaiableWeekDays = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado']
 
 export function New() {
-    const [title, setTitle] = useState('')
     const [weekDays, setWeekDays] = useState<number[]>([])
+    const [title, setTitle] = useState('')
 
     function handleToggleWeekDay(weekDayIndex: number) {
         if(weekDays.includes(weekDayIndex)){
@@ -23,8 +23,7 @@ export function New() {
     async function handleCreateNewHabit() {
         try {
             if(!title.trim() || weekDays.length === 0) {
-                Alert.alert('Novo hábito', 'Informe o nome do hábito e escolha a periodicidade.')
-                return
+                return Alert.alert('Novo hábito', 'Informe o nome do hábito e escolha a periodicidade.')
             }
 
             await api.post('/habits', {title, weekDays});
