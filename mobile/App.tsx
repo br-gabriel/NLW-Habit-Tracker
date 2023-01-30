@@ -16,18 +16,18 @@ export default function App() {
     Inter_600SemiBold, 
     Inter_700Bold, 
     Inter_800ExtraBold 
-  })
+  });
 
   if(!fontsLoaded) {
     return (
       <Loading />
-    )
-  }
+    );
+  };
 
   return (
     <>
-      <StatusBar barStyle={"light-content"} backgroundColor="transparent" translucent/>
       <Routes />
+      <StatusBar barStyle={"light-content"} backgroundColor="transparent" translucent/>
     </>
   );
 }
