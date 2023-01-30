@@ -24,7 +24,7 @@ export async function appRoutes(app: FastifyInstance) {
                         return {
                             week_day: weekDay,
                         }
-                    })
+                    }),
                 }
             }
         })
@@ -50,7 +50,7 @@ export async function appRoutes(app: FastifyInstance) {
                         week_day: weekDay,
                     }
                 }
-            }
+            },
         })
 
         const day = await prisma.day.findUnique({
@@ -64,14 +64,14 @@ export async function appRoutes(app: FastifyInstance) {
 
         const completedHabits = day?.dayHabits.map(dayHabit => {
             return dayHabit.habit_id
-        })
+        }) ?? []
 
         return {
             possibleHabits,
-            completedHabits
+            completedHabits,
         }
     })
-
+    
     app.patch('/habits/:id/toggle', async (request) => {
         const toggleHabitParams = z.object({
             id: z.string().uuid(),
