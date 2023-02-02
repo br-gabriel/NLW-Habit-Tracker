@@ -12,7 +12,7 @@ const secondHabitCreationDate = new Date('2023-01-03T00:00:00.000')
 const thirdHabitId = 'fa1a1bcf-3d87-4626-8c0d-d7fd1255ac00'
 const thirdHabitCreationDate = new Date('2023-01-08T00:00:00.000')
 
-const fourthHabitId = 'ha1a1ecf-3g87-4626-8f0d-b7fn1255at00'
+const fourthHabitId = '704ba067-232b-4c55-8654-c18b7d797854'
 const fourthHabitCreationDate = new Date('2023-01-20T00:00:00.000')
 
 async function run() {
@@ -26,7 +26,7 @@ async function run() {
     prisma.habit.create({
       data: {
         id: firstHabitId,
-        title: 'Surfar',
+        title: 'Ir a praia',
         created_at: firstHabitCreationDate,
         weekDays: {
           create: [
