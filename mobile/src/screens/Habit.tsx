@@ -36,8 +36,8 @@ export function Habit() {
     const isDateInPast = parsedDate.isBefore(new Date());
     const dayOfWeek = parsedDate.format('dddd');
     const dayAndMonth = parsedDate.format('DD/MM');
-    
-    const habitsProgress = dayInfo?.possibleHabits?.length ? generateProgressPercentage(dayInfo.possibleHabits.length, completedHabits.length) : 0
+
+    const habitsProgress = dayInfo?.possibleHabits.length ? generateProgressPercentage(dayInfo.possibleHabits.length, completedHabits.length) : 0
 
     async function fetchHabits() {
         try {
@@ -106,8 +106,8 @@ export function Habit() {
                                 <Checkbox
                                     key={habit.id}
                                     title={habit.title}
-                                    checked={completedHabits?.includes(habit.id)}
-                                    onPress={() => {handleToggleHabit(habit.id), console.log(completedHabits)}}
+                                    checked={completedHabits.includes(habit.id)}
+                                    onPress={() => {handleToggleHabit(habit.id)}}
                                     disabled={isDateInPast}
                                 />
                             ))
