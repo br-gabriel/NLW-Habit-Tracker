@@ -30,6 +30,14 @@ export async function appRoutes(app: FastifyInstance) {
         })
     })
 
+    app.get('/habits/all', async() => {
+        const allHabits = await prisma.habit.findMany()
+
+        return {
+            allHabits
+        }
+    })
+
     app.get('/day', async (request) => {
         const getDayParams = z.object({
             date: z.coerce.date()
