@@ -36,7 +36,7 @@ navigator.serviceWorker.register('service-worker.js')
 
 export function App() {
   return (
-    <div className='bg-background text-white w-screen h-screen flex justify-center items-center'>
+    <div className='bg-background text-white w-screen h-screen flex justify-center items-center overflow-y-auto scrollbar-thin scrollbar-thumb-transparent scrollbar-track-transparent'>
       <div className='w-full max-w-5xl px-6 flex flex-col gap-16'>
         <Header />
         <SummaryTable />
