@@ -1,6 +1,6 @@
 # NLW-Habit-Tracker
 <p align="center">
-   <img align="left" src="Habits-desktop.png" width="100%"/>
+   <img src="Habits-desktop.png" width="100%"/>
 </p>
 
 <p align="center">
