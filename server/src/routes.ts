@@ -3,7 +3,7 @@ import { prisma } from './lib/prisma'
 import { z } from 'zod'
 import dayjs from 'dayjs'
 
-export async function appRoutes(app: FastifyInstance) {
+export async function appRoutes(app: FastifyInstance) {  
     app.post('/habits', async (request) => {
         const createHabitBody = z.object({
             title: z.string(),
@@ -30,33 +30,49 @@ export async function appRoutes(app: FastifyInstance) {
         })
     })
 
-    app.get('/habits/all', async() => {
-        const allHabits = await prisma.habit.findMany()
+    app.patch('/habits/rename', async (request) => {
+        const updateHabitBody = z.object({
+            id: z.string().uuid(),
+            new_title: z.string(),
+        })
 
-        return {
-            allHabits
-        }
+        const { id, new_title } = updateHabitBody.parse(request.body)
+
+        await prisma.habit.update({
+            where: {
+                id,
+            },
+            data: {
+                title: new_title,
+            }
+        })
     })
     
     app.patch('/habits/:id/toggle', async (request) => {
         const toggleHabitParams = z.object({
-            id: z.string().uuid(),
+            id: z.string().uuid()
+            
+        })
+
+        const toggleHabitQuery = z.object({
+            date: z.coerce.date()
         })
 
         const { id } = toggleHabitParams.parse(request.params)
+        const { date } = toggleHabitQuery.parse(request.query)
 
-        const today = dayjs().startOf('day').toDate()
+        const parsedDate = dayjs(date).startOf('day').toISOString()
 
         let day = await prisma.day.findUnique({
             where: {
-                date: today,
+                date: parsedDate,
             }
         })
 
         if (!day) {
             day = await prisma.day.create({
                 data: {
-                    date: today,
+                    date: parsedDate,
                 }
             })
         }
@@ -83,6 +99,14 @@ export async function appRoutes(app: FastifyInstance) {
                     habit_id: id,
                 }
             })
+        }
+    })
+
+    app.get('/habits/all', async() => {
+        const allHabits = await prisma.habit.findMany()
+
+        return {
+            allHabits
         }
     })
 
