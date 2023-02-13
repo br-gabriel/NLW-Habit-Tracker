@@ -32,8 +32,8 @@ export function Habit() {
     const route = useRoute();
     const { date } = route.params as Params;
 
-    const parsedDate = dayjs(date);
     //const isDateInPast = parsedDate.isBefore(new Date());
+    const parsedDate = dayjs(date);
     const dayOfWeek = parsedDate.format('dddd');
     const dayAndMonth = parsedDate.format('DD/MM');
 
@@ -42,7 +42,6 @@ export function Habit() {
     async function fetchHabits() {
         try {
             setLoading(true)
-
             const response = await api.get('/day', { params: { date } });
             setDayInfo(response.data);
             setCompletedHabits(response.data.completedHabits ?? [])
@@ -56,8 +55,7 @@ export function Habit() {
 
     async function handleToggleHabit(habitId: string) {
         try {
-            await api.patch(`/habits/${habitId}/toggle`);
-
+            await api.patch(`/habits/${habitId}/toggle/${parsedDate.toISOString()}`);
             if (completedHabits?.includes(habitId)) {
                 setCompletedHabits(prevState => prevState.filter(habit => habit !== habitId));
             } else {
