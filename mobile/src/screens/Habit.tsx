@@ -33,7 +33,7 @@ export function Habit() {
     const { date } = route.params as Params;
 
     const parsedDate = dayjs(date);
-    const isDateInPast = parsedDate.isBefore(new Date());
+    //const isDateInPast = parsedDate.isBefore(new Date());
     const dayOfWeek = parsedDate.format('dddd');
     const dayAndMonth = parsedDate.format('DD/MM');
 
@@ -98,7 +98,7 @@ export function Habit() {
                 <ProgressBar progress={habitsProgress}/>
 
                 <View className={clsx("mt-6", {
-                    ['opacity-50']: isDateInPast
+                    // ['opacity-50']: isDateInPast
                 })}>
                     {
                         dayInfo?.possibleHabits ?
@@ -108,7 +108,7 @@ export function Habit() {
                                     title={habit.title}
                                     checked={completedHabits.includes(habit.id)}
                                     onPress={() => {handleToggleHabit(habit.id)}}
-                                    disabled={isDateInPast}
+                                    //disabled={isDateInPast}
                                 />
                             ))
                             :
@@ -116,13 +116,13 @@ export function Habit() {
                     }
                 </View>
 
-                {
+                {/* {
                     isDateInPast && (
                         <Text className="text-white mt-10 text-center">
                             Você não pode editar hábitos de uma data passada.
                         </Text>
                     )
-                }
+                } */}
             </ScrollView>
         </View>
     )
