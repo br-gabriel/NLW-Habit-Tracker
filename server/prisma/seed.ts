@@ -13,7 +13,7 @@ const thirdHabitId = 'fa1a1bcf-3d87-4626-8c0d-d7fd1255ac00'
 const thirdHabitCreationDate = new Date('2023-01-08T00:00:00.000')
 
 const fourthHabitId = '704ba067-232b-4c55-8654-c18b7d797854'
-const fourthHabitCreationDate = new Date('2023-01-20T00:00:00.000')
+const fourthHabitCreationDate = new Date('2023-01-16T00:00:00.000')
 
 async function run() {
   await prisma.habit.deleteMany()
@@ -90,9 +90,6 @@ async function run() {
   ])
 
   await Promise.all([
-    /**
-     * Habits (Complete/Available): 1/1
-     */
     prisma.day.create({
       data: {
         date: new Date('2023-01-01T03:00:00.000z'),
