@@ -48,19 +48,14 @@ export async function appRoutes(app: FastifyInstance) {
         })
     })
     
-    app.patch('/habits/:id/toggle', async (request) => {
+    app.patch('/habits/:id/toggle/:date', async (request) => {
         const toggleHabitParams = z.object({
-            id: z.string().uuid()
-            
+            id: z.string().uuid(),
+            date: z.coerce.date() 
         })
 
-        const toggleHabitQuery = z.object({
-            date: z.coerce.date()
-        })
-
-        const { id } = toggleHabitParams.parse(request.params)
-        const { date } = toggleHabitQuery.parse(request.query)
-
+        const { id, date } = toggleHabitParams.parse(request.params)
+        
         const parsedDate = dayjs(date).startOf('day').toISOString()
 
         let day = await prisma.day.findUnique({
