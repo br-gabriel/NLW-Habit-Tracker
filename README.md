@@ -11,30 +11,11 @@
 Aplicação completa desenvolvida durante o primeiro NLW da Rocketseat de 2023, trata-se de um sistema completo (servidor, web e mobile) de um *habit tracker*.
 
 ## Tecnologias
-### Server
-- typescript
-- fastify
-- prisma
-- dayjs
-- zod
-### Web
-- vite
-- typescript
-- radix ui
-- axios
-- clsx
-- dayjs
-- tailwind css
-- phosphor react
-### App
-- expo
-- axios
-- typescript
-- clsx
-- dayjs
-- nativewind css
-- react native svg
-- react native reanimated
+<b>Server:</b> typescript, fastify, prisma, dayjs, zod
+
+<b>Web:</b> vite, typescript, radix ui, axios, clsx, dayjs, tailwind css, phosphor react
+
+<b>Mobile:</b> expo, axios, typescript, clsx, dayjs, nativewind css, react native svg, react native reanimated
 
 ## Como rodar o projeto
 ### Server
@@ -59,7 +40,9 @@ yarn dev
 ```
 
 ### Web
-1 - Instalar todas as dependências
+1 - ir em `web/src/lib/axios.ts` e colocar o ip da máquina local. ex: `'http://000.000.0.00:3333'` como parâmetro do `baseURL`
+
+2 - Instalar todas as dependências
 ```
 npm install
 ```
@@ -68,7 +51,7 @@ ou
 yarn
 ```
 
-2 - Rodar a aplicação
+3 - Rodar a aplicação
 ```
 npm run dev
 ```
@@ -78,9 +61,11 @@ yarn dev
 ```
 
 ### Mobile
-Primeiro deve-se
+1 - Instalar o aplicativo do 'expo' no smartphone ou baixar o emulador do android studio para testar a aplicação.
 
-1 - Instalar todas as dependências
+2 - Ir em `mobile/src/lib/axios.ts` e colocar o ip da máquina local. ex: `'http://000.000.0.00:3333'` como parâmetro do `baseURL`
+
+3 - Instalar todas as dependências
 ```
 npm install
 ```
@@ -89,7 +74,8 @@ ou
 yarn
 ```
 
-2 - Rodar a aplicação
+4 - Rodar a aplicação
 ```
 npx expo start
 ```
+5 - Selecionar o ambiente que a aplicação será executada (app do expo ou emulador).
