@@ -21,6 +21,8 @@ Aplicação completa desenvolvida durante o primeiro NLW da Rocketseat de 2023, 
 ### Server
 Para que aplicação web e/ou mobile funcione corretamente é necessário deixar o servidor rodando em paralelo.
 
+
+
 1 - Instalar todas as dependências
 ```
 npm install
@@ -30,7 +32,15 @@ ou
 yarn
 ```
 
-2 - Rodar o servidor
+2 - Criar o banco de dados
+```
+npx prisma migrate dev
+```
+
+2.1 - Dados fictícios
+Caso queira ter alguns dados fictícios para testar a aplicação, rode o seguinte comando no cmd: `npx prisma db seed`
+
+3 - Rodar o servidor
 ```
 npm run dev
 ```
